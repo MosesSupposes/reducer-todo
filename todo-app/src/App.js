@@ -32,6 +32,7 @@ function App() {
         completed: false
       }
     });
+    setInputText("");
   };
 
   // Action Creators
