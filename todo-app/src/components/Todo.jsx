@@ -9,10 +9,8 @@ export default function Todo(props) {
     }
   } = props;
 
-  console.log("TASK", task);
-
   return (
-    <div className="Todo">
+    <div className={`Todo ${completed ? "completed" : ""}`}>
       <p>{task}</p>
       <input
         type="checkbox"
