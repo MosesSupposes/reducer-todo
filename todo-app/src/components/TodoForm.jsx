@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 
 export default function TodoForm(props) {
-  const { inputText, changeHandler } = props;
+  const { inputText, changeHandler, clearCompleted } = props;
   return (
     <div className="TodoForm">
       <form onSubmit={props.submitHandler}>
@@ -13,6 +13,7 @@ export default function TodoForm(props) {
         ></input>
         <button type="submit">Add Todo</button>
       </form>
+      <button onClick={clearCompleted}>Clear Completed</button>
     </div>
   );
 }

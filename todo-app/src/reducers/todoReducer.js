@@ -28,6 +28,11 @@ export function todoReducer(state, action) {
             : { todo };
         })
       };
+    case "CLEAR_COMPLETED":
+      return {
+        ...state,
+        todos: state.todos.filter(({ todo }) => !todo.completed)
+      };
     default:
       return state;
   }

@@ -34,6 +34,7 @@ function App() {
     });
   };
 
+  // Action Creators
   const deleteTodo = id => {
     dispatch({ type: "DELETE_TODO", payload: id });
   };
@@ -42,12 +43,17 @@ function App() {
     dispatch({ type: "TOGGLE_COMPLETED", payload: id });
   };
 
+  const clearCompleted = () => {
+    dispatch({ type: "CLEAR_COMPLETED" });
+  };
+
   return (
     <div className="App">
       <TodoForm
         submitHandler={submitHandler}
         changeHandler={changeHandler}
         inputText={inputText}
+        clearCompleted={clearCompleted}
       />
       <TodoList
         todos={state.todos}
