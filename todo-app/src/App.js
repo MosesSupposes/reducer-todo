@@ -1,5 +1,6 @@
 import React, { useState, useReducer } from "react";
 import "./App.scss";
+import moment from "moment";
 
 // Contexts
 import { TodoContext } from "./contexts/TodoContext";
@@ -29,7 +30,8 @@ function App() {
       payload: {
         id: Date.now(),
         task: inputText,
-        completed: false
+        completed: false,
+        completeDate: moment().format("MMM Do YYYY, h:mm:ss a")
       }
     });
     setInputText("");
