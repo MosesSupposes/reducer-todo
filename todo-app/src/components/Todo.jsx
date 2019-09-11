@@ -7,18 +7,22 @@ export default function Todo(props) {
   // destructuring object properties
   let {
     todo: {
-      todo: { task, id, completed }
+      todo: { task, id, completed, completeDate }
     }
   } = props;
 
   return (
-    <div className={`Todo ${completed ? "completed" : ""}`}>
+    <div className={`Todo`}>
       <p
+        className={`todo-text ${completed ? "completed" : ""}`}
         onClick={() => {
           toggleCompleted(id);
         }}
       >
         {task}
+      </p>
+      <p className="todo-date">
+        {completed ? `completed: ${completeDate}` : null}
       </p>
       <div>
         {/* <input
