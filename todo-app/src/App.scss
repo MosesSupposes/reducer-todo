@@ -1,0 +1,110 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+
+$green: #34bf49;
+$red: #ff4c4c;
+$blue: #0099e5;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.App {
+}
+
+body {
+  background: #2193b0; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #6dd5ed,
+    #2193b0
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #6dd5ed,
+    #2193b0
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.completed {
+  text-decoration: line-through;
+}
+.TodoForm {
+  display: flex;
+  justify-content: center;
+  border-radius: 2px;
+  width: 100%;
+  max-width: 30rem;
+  margin: 2rem auto;
+  padding: 1rem;
+
+  .form {
+    display: flex;
+    justify-content: center;
+
+    .form-input {
+      font-family: "Proxima Nova", sans-serif;
+      border: none;
+      background: none;
+      border-bottom: 1px solid #4a4a4a;
+      height: 50px;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #fff;
+
+      &:focus {
+        outline: none;
+      }
+
+      &::placeholder {
+        color: #fff;
+      }
+    }
+
+    .add-todo-btn {
+      font-size: 1.5rem;
+      color: $green;
+      border: none;
+      background: none;
+      cursor: pointer;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 0 1rem;
+    }
+  }
+
+  .clear-completed-btn {
+    font-size: 1.5rem;
+    color: $red;
+    background: none;
+    border: none;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.1);
+    padding: 0 1rem;
+  }
+}
+
+.Todo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 1.2rem auto;
+  max-width: 30%;
+  padding: 1rem;
+  box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.4);
+  color: #fff;
+  font-size: 1.5rem;
+
+  .delete-todo-btn {
+    color: $red;
+    font-size: 1rem;
+    background: none;
+    border: none;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.1);
+    height: 100%;
+  }
+  .check-complete {
+  }
+}
