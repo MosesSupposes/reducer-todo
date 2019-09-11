@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export const initialState = {
   todos: []
 };
@@ -24,7 +26,13 @@ export function todoReducer(state, action) {
         todos: state.todos.map(({ todo }) => {
           console.log("todo.completed:", todo.completed);
           return matchedId.todo.id === todo.id
-            ? { todo: { ...todo, completed: !todo.completed } }
+            ? {
+                todo: {
+                  ...todo,
+                  completed: !todo.completed,
+                  completeDate: moment().format("MMM Do YYYY, h:mm:ss a")
+                }
+              }
             : { todo };
         })
       };
