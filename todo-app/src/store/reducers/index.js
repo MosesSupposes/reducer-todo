@@ -2,6 +2,7 @@ import moment from "moment"
 
 import {
   SUBMIT_TODO,
+  SUBMIT_FAILED,
   DELETE_TODO,
   TOGGLE_COMPLETED,
   CLEAR_COMPLETED,
@@ -10,7 +11,8 @@ import {
 
 export const initialState = {
   inputText: "",
-  todos: JSON.parse(localStorage.getItem("todos")) || []
+  todos: JSON.parse(localStorage.getItem("todos")) || [],
+  error: false
 }
 
 export function todoReducer(state = initialState, action) {
@@ -21,6 +23,9 @@ export function todoReducer(state = initialState, action) {
         inputText: action.payload
       }
     case SUBMIT_TODO:
+      if (!state.inputText) {
+        return { ...state }
+      }
       localStorage.setItem(
         "todos",
         JSON.stringify(state.todos.concat(action.payload))
@@ -28,8 +33,11 @@ export function todoReducer(state = initialState, action) {
       return {
         ...state,
         inputText: "",
-        todos: JSON.parse(localStorage.getItem("todos"))
+        todos: JSON.parse(localStorage.getItem("todos")),
+        error: false
       }
+    case SUBMIT_FAILED:
+      return { ...state, error: true }
     case DELETE_TODO:
       localStorage.setItem(
         "todos",
