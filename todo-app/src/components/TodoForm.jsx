@@ -1,18 +1,40 @@
-import React, { useContext } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
+import React from "react"
+import { useSelector, useDispatch } from "react-redux"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
+import moment from "moment"
 
-export default function TodoForm(props) {
-  const { inputText, changeHandler, clearCompleted } = props;
+export default function TodoForm() {
+  const dispatch = useDispatch()
+  const inputText = useSelector(state => state.inputText)
   return (
     <div className="TodoForm">
       <div>
-        <form className="form" onSubmit={props.submitHandler}>
+        <form
+          className="form"
+          onSubmit={e => {
+            e.preventDefault()
+            dispatch({
+              type: "SUBMIT_TODO",
+              payload: {
+                id: Date.now(),
+                task: inputText,
+                completed: false,
+                completeDate: moment().format("MMM Do YYYY, h:mm:ss a")
+              }
+            })
+          }}
+        >
           <input
             className="form-input"
             type="text"
             placeholder="add todo..."
-            onChange={changeHandler}
+            onChange={e => {
+              dispatch({
+                type: "CHANGE_INPUT",
+                payload: e.target.value
+              })
+            }}
             value={inputText}
           ></input>
           <button className="add-todo-btn" type="submit">
@@ -21,9 +43,14 @@ export default function TodoForm(props) {
         </form>
       </div>
 
-      <button className="clear-completed-btn" onClick={clearCompleted}>
+      <button
+        className="clear-completed-btn"
+        onClick={() => {
+          dispatch({ type: "CLEAR_COMPLETED" })
+        }}
+      >
         <FontAwesomeIcon icon={faTrash} />
       </button>
     </div>
-  );
+  )
 }

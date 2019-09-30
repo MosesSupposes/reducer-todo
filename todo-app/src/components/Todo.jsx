@@ -1,45 +1,37 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faCheck, faTrash } from "@fortawesome/free-solid-svg-icons";
+import React from "react"
+import { useDispatch } from "react-redux"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faTrash } from "@fortawesome/free-solid-svg-icons"
 
-export default function Todo(props) {
-  const { deleteTodo, toggleCompleted } = props;
-  // destructuring object properties
-  let {
-    todo: {
-      todo: { task, id, completed, completeDate }
-    }
-  } = props;
-
+export default function Todo({ todo }) {
+  const dispatch = useDispatch()
+  const { id, task, completed, completeDate } = todo
   return (
-    <div className={`Todo`}>
-      <p
-        className={`todo-text ${completed ? "completed" : ""}`}
-        onClick={() => {
-          toggleCompleted(id);
-        }}
-      >
-        {task}
-      </p>
-      <p className="todo-date">
-        {completed ? `completed: ${completeDate}` : null}
-      </p>
+    <div
+      className={`Todo`}
+      onClick={e => {
+        e.stopPropagation()
+        dispatch({ type: "TOGGLE_COMPLETED", payload: id })
+      }}
+    >
+      <div className="todo-info">
+        <p className={`todo-text ${completed ? "completed" : ""}`}>{task}</p>
+        <p className="todo-date">
+          {completed ? `completed: ${completeDate}` : null}
+        </p>
+      </div>
+
       <div>
-        {/* <input
-          className="check-complete"
-          type="checkbox"
-          checked={completed}
-          }
-        /> */}
         <button
           className="delete-todo-btn"
-          onClick={() => {
-            deleteTodo(id);
+          onClick={e => {
+            e.stopPropagation()
+            dispatch({ type: "DELETE_TODO", payload: id })
           }}
         >
           <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
         </button>
       </div>
     </div>
-  );
+  )
 }
